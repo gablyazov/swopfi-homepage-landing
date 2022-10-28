@@ -1,0 +1,51 @@
+@import '~include-media/dist/_include-media';
+@import "normalize";
+@import "fonts";
+@import "mixins&functions";
+
+$breakpoints: (
+  phone: 375px,
+  tablet: 767px,
+  laptop: 1024px,
+  desktop: 1440px,
+);
+
+.homepage{
+  //variables
+  --container: 1140px;
+  --color-text: #292C30;
+  --color-primary: #12A07E;
+  --color-primary-hover: #027F68;
+  --color-primary-disabled: #88CFBE;
+  @include media("<desktop"){
+    --container: calc(100% - 32px);
+  }
+  @include media("<laptop"){
+    --container: calc(100% - 80px);
+  }
+  @include media("<tablet"){
+    --container: calc(100% - 16px);
+  }
+
+  // types
+  h1,h2,h3,h3{
+    font-family: 'Gilroy', Arial;
+    font-weight: 700;
+    margin-bottom: em(24);
+  }
+  h1{
+    font-size: em(48);
+    line-height: 1.2;
+    @include media("<=tablet"){
+      font-size: em(32);
+    }
+  }
+  h2{
+    font-size: em(40);
+    line-height: 1.2;
+    @include media("<=tablet"){
+      font-size: em(30);
+    }
+  }
+}
+

@@ -1,0 +1,21 @@
+@use "sass:math";
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+@function sass-calc($val1, $val2) {
+  @return math.div($val1, $val2);
+}
+@function rem($pixels, $context: 16) {
+  $pxls: strip-unit($pixels);
+  $res: sass-calc($pxls, $context);
+  @return #{$res}rem;
+}
+@function em($pixels, $context: 16) {
+  $pxls: strip-unit($pixels);
+  $res: sass-calc($pxls, $context);
+  @return #{$res}em;
+}
