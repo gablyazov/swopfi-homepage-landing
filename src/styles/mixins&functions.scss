@@ -19,3 +19,29 @@
   $res: sass-calc($pxls, $context);
   @return #{$res}em;
 }
+
+@mixin type-18-500(){
+  font-size: em(18);
+  line-height: 1.4;
+  font-weight: 500;
+}
+@mixin type-16-500(){
+  font-size: em(16);
+  line-height: 1.4;
+  font-weight: 500;
+}
+@mixin type-16-600(){
+  font-size: em(16);
+  line-height: 1.4;
+  font-weight: 600;
+}
+@mixin type-14-500(){
+  font-size: em(14);
+  line-height: 1.4;
+  font-weight: 500;
+}
+@mixin type-14-600(){
+  font-size: em(14);
+  line-height: 1.4;
+  font-weight: 600;
+}
