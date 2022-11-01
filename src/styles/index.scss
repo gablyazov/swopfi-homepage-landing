@@ -60,23 +60,34 @@ $breakpoints: (
   .button{
     text-align: center;
     border-radius: 10px;
-    color: var(--color-text-inverded);
     cursor: pointer;
-    background: var(--color-primary);
     box-sizing: border-box;
-    min-width: em(204);
-    padding: em(13) em(20);
     font-weight: 600;
     transition: var(--default-transition);
     @include type-16-600;
-    &:hover,
-    &:focus,
-    &:active{
+    &--primary{
       color: var(--color-text-inverded);
-      background: var(--color-primary-hover);
+      background: var(--color-primary);
+      min-width: em(204);
+      padding: em(13) em(20);
+      &:disabled{
+        background: var(--color-primary-disabled);
+      }
+      &:hover,
+      &:focus,
+      &:active{
+        color: var(--color-text-inverded);
+        background: var(--color-primary-hover);
+      }
     }
-    &:disabled{
-      background: var(--color-primary-disabled);
+    &--secondary{
+      background: transparent;
+      padding: em(13) em(4);
+      &:hover,
+      &:focus,
+      &:active{
+        color: var(--color-primary-hover);
+      }
     }
   }
   &__container{
@@ -100,17 +111,30 @@ $breakpoints: (
   }
   &__profit{
     margin-top: rem(80);
+    @include media("<=tablet", ">phone"){
+      margin-top: rem(80);
+    }
   }
   &__invest{
     margin-top: rem(128);
+    @include media("<=tablet", ">phone"){
+      margin-top: rem(90);
+    }
   }
   &__work{
-    margin-top: rem(100);
+    margin-top: rem(81);
     margin-bottom: rem(104);
   }
 }
 
 .section-content{
+  @include media("<=tablet"){
+    max-width: 444px;
+    margin-bottom: 32px;
+    @include media("<=phone"){
+      max-width: 100%;
+    }
+  }
   &__title{
     margin: 0 0 rem(24);
     @include media("<=phone"){
@@ -124,18 +148,43 @@ $breakpoints: (
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin: calc(#{em(16)} * -1);
+    margin: -8px;
     padding-top: em(32);
+    @include media("<=phone"){
+      margin: 0;
+    }
   }
   &__link{
-    margin: em(16);
+    margin: 8px;
+    @include media("<=phone"){
+      margin-bottom: 8px;
+      width: 100%;
+      &:last-child{
+        margin-bottom: 0;
+      }
+    }
   }
 }
 
 .homepage-intro{
+  .section-content{
+    @include media("<=tablet"){
+      max-width: 500px;
+      @include media("<=phone"){
+        max-width: 100%;
+      }
+    }
+    .section-content__description{
+      @include type-18-500;
+    }
+  }
+
+  .section-content__description{
+    @include type-18-500;
+  }
   @include media(">tablet"){
     display: grid;
-    grid-row-gap: em(64);
+    grid-row-gap: em(70);
     grid-template-columns: 43% auto;
     grid-template-rows: auto auto;
     &__cell{
@@ -158,8 +207,23 @@ $breakpoints: (
       top: 0;
       transform: translate(-2%, 1%);
     }
-    .section-content__description{
-      @include type-18-500;
+  }
+  @include media("<=tablet", ">phone"){
+    &__cell{
+      &--content{}
+      &--image{
+        margin-top: 53px;
+      }
+      &--cards{
+        margin-top: -70px;
+      }
+    }
+    &__image{
+      width: 94%;
+      margin: 0 auto;
+      display: block;
+      position: relative;
+      transform: translate(1.5%, 0px);
     }
   }
 }
@@ -167,11 +231,14 @@ $breakpoints: (
   display: flex;
   align-items: stretch;
   margin: -13px;
+  @include media("<=tablet", ">phone"){
+    margin: -7px;
+  }
   &__item{
     flex: 0 1 33%;
     display: flex;
     align-items: flex-start;
-    margin: 13px;
+    margin: 7px;
     padding: em(32);
     background: rgba(255, 255, 255, 1);
     box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.25);
@@ -182,12 +249,20 @@ $breakpoints: (
       background: rgba(255, 255, 255, .7);
       backdrop-filter: blur(5px);
     }
+    @include media("<=tablet", ">phone"){
+      flex-direction: column;
+      padding: em(16);
+    }
     &-img{
       flex: 0 0 em(24);
       color: #7D989C;
       width: em(24);
       height: auto;
       margin-right: em(15);
+      @include media("<=tablet", ">phone"){
+        margin-right: 0;
+        margin-bottom: 16px;
+      }
     }
     &-content{
       flex: 1 1 auto;
@@ -206,15 +281,27 @@ $breakpoints: (
 }
 
 .homepage-profit{
-  display: flex;
-  align-items: center;
-  &__cell{
-    &--content{
-      flex: 1 1 auto;
-      padding-right: 70px;
+  @include media(">tablet"){
+    display: flex;
+    align-items: center;
+    &__cell{
+      &--content{
+        flex: 1 1 auto;
+        padding-right: 70px;
+      }
+      &--tabs{
+        flex: 0 0 625px;
+      }
     }
-    &--tabs{
-      flex: 0 0 625px;
+  }
+  @include media("<=tablet"){
+    display: block;
+    &__cell{
+      &--content{
+
+      }
+      &--tabs{
+      }
     }
   }
 }
@@ -236,6 +323,7 @@ $breakpoints: (
   }
   &__button{
     @include type-14-600;
+    line-height: 16px; //fix to incorrect figma
     border-radius: 7px;
     padding: 6px 8px;
     flex: 0 0 50%;
@@ -258,9 +346,11 @@ $breakpoints: (
     }
     table{
       width: 100%;
+      border-spacing: 0;
       th,td{
+        box-sizing: border-box;
+        height: 56px;
         border-bottom: 2px solid var(--page-bg);
-        padding: 16px 15px;
         text-align: left;
         &:first-child{
           padding-left: 24px;
@@ -271,10 +361,12 @@ $breakpoints: (
         }
       }
       th{
-
+        @include type-14-600;
+        padding: 18px 15px;
       }
       td{
-
+        @include type-14-500;
+        padding: 16px 15px;
       }
       tr{
         &:last-child{
@@ -314,11 +406,34 @@ $breakpoints: (
       transform: translate(2%, -9%);
     }
   }
+  @include media("<=tablet", ">phone"){
+    &__cell{
+      &--content{}
+      &--image{
+        margin-top: 49px;
+      }
+      &--cards{
+        margin-top: -114px;
+      }
+    }
+    &__image{
+      width: 108%;
+      left: 52%;
+      margin: 0 auto;
+      display: block;
+      position: relative;
+      transform: translateX(-50%);
+    }
+  }
 }
 .homepage-invest-cards{
   display: flex;
   align-items: stretch;
   margin: -13px;
+  @include media("<=tablet", ">phone"){
+    margin: 0px;
+    flex-direction: column;
+  }
   &__item{
     flex: 0 1 33%;
     display: flex;
@@ -334,6 +449,12 @@ $breakpoints: (
     @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
       background: rgba(255, 255, 255, .7);
       backdrop-filter: blur(5px);
+    }
+    @include media("<=tablet", ">phone"){
+      margin: 0 0 10px;
+      &:last-child{
+        margin-bottom: 0;
+      }
     }
     &-label{
       font-size: em(16);
@@ -373,15 +494,27 @@ $breakpoints: (
 }
 
 .homepage-work{
-  display: flex;
-  align-items: center;
-  &__cell{
-    &--content{
-      flex: 1 1 auto;
-      padding-right: 70px;
+  @include media(">tablet"){
+    display: flex;
+    align-items: center;
+    &__cell{
+      &--content{
+        flex: 1 1 auto;
+        padding-right: 70px;
+      }
+      &--video{
+        flex: 0 0 625px;
+      }
     }
-    &--video{
-      flex: 0 0 625px;
+  }
+  @include media("<=tablet"){
+    &__cell{
+      &--content{
+        margin-bottom: 42px;
+      }
+      &--video{
+
+      }
     }
   }
 }
@@ -447,6 +580,11 @@ $breakpoints: (
     &:hover{
       .homepage-work-yt__placeholder-button-icon{
         transform: translate(-50%, -50%) scale(1);
+      }
+    }
+    &--activated{
+      .homepage-work-yt__placeholder{
+        display: none;
       }
     }
   }
