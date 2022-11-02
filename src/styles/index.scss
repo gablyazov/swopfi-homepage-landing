@@ -134,8 +134,11 @@ $breakpoints: (
     }
   }
   &__work{
-    margin-top: rem(81);
+    margin-top: rem(99);
     margin-bottom: rem(104);
+    @include media("<=tablet", ">phone"){
+      margin-top: rem(80);
+    }
     @include media("<=phone"){
       margin-top: rem(56px);
     }
@@ -198,7 +201,7 @@ $breakpoints: (
   }
   @include media(">tablet"){
     display: grid;
-    grid-row-gap: em(70);
+    grid-row-gap: em(64);
     grid-template-columns: 43% auto;
     grid-template-rows: auto auto;
     &__cell{
