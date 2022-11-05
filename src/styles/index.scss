@@ -181,10 +181,7 @@ $breakpoints: (
       }
     }
   }
-}
-
-.homepage-intro{
-  .section-content{
+  &--intro{
     @include media("<=tablet"){
       max-width: 500px;
       @include media("<=phone"){
@@ -195,10 +192,9 @@ $breakpoints: (
       @include type-18-500;
     }
   }
+}
 
-  .section-content__description{
-    @include type-18-500;
-  }
+.homepage-intro{
   @include media(">tablet"){
     display: grid;
     grid-row-gap: em(64);
